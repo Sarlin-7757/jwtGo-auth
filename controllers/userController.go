@@ -110,6 +110,7 @@ func Signup() gin.HandlerFunc {
 	}
 }
 
+// we need email and password for login
 func Login() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var ctx, cancel = context.WithTimeout(context.Background(), 100*time.Second)
@@ -152,6 +153,7 @@ func Login() gin.HandlerFunc {
 	}
 }
 
+// if we are the ADMIN then only can access this path
 func GetUsers() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		if err := helper.CheckUserType(c, "ADMIN"); err != nil {
@@ -201,6 +203,8 @@ func GetUsers() gin.HandlerFunc {
 
 /* GetUser function only the user can get his own data
 and not other users data */
+
+// You need id and token to access your details
 
 func GetUser() gin.HandlerFunc {
 	return func(c *gin.Context) {
